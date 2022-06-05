@@ -53,6 +53,18 @@ const App = () => {
     consulta()
   }, [])
 
+  
+    const erase = id => {
+      try {
+        const db = firebase.firestore()
+        db.collection('proyecto').doc(id).delete()
+        const aux = listaPokemon.filter(item => item.id !== id)
+        setListaPokemon(aux)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
   return (
     <div className='container'>
       <h1 className='text-center'>Aplicación</h1>
@@ -65,8 +77,10 @@ const App = () => {
           <div key={item.id}>
             <label htmlFor={item.id}>{item.name}</label>
             <img src={item.img} alt={item.name} id={item.id} />
+            <button 
+            className='btn btn-warning btn-block mx-2' 
+            onClick={erase}>Eliminar</button>
           </div>
-
         ))
       }
     </div>
