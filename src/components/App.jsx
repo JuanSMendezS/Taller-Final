@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import Busqueda from './Busqueda'
+import Contenedor from './Contenedor'
 
-const App = () => {
+const App = (categorias) => {
 
   const [catBusqueda, setCatBusqueda] = useState(categorias)
 
@@ -12,7 +13,7 @@ const App = () => {
       <hr />
       <ol>
         {
-          catBusqueda.map(catbusqueda => (
+          catBusqueda.map(catBusqueda => (
             <Contenedor
               key={catBusqueda}
               valorBusqueda={catBusqueda}

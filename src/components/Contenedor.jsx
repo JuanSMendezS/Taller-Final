@@ -1,5 +1,5 @@
 import React from 'react'
-import { getApi } from '../helpers/getApi'
+import ApiItem from './Item'
 import { useGetApi } from '../hooks/useGetApi'
 
 const Contenedor = ({ valorBusqueda }) => {
