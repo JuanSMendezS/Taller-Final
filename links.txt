@@ -1,2 +1,4 @@
 Amplify
 https://main.d2fykzfddmdrqh.amplifyapp.com/
+Netlify
+https://bright-torte-a21bf3.netlify.app/
