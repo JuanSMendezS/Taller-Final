@@ -42,7 +42,6 @@ const App = () => {
       } catch (err) {
         console.error(err)
       }
-
     }
     if (Object.keys(pokemon).length > 0) {
       savePoke()
@@ -64,6 +63,21 @@ const App = () => {
         console.log(err)
       }
     }
+  
+
+  const edit = async (e) => {
+    e.preventDefault()
+    try {
+      const db = firebase.firestore()
+      const data = await db.collection('proyecto')
+      await db.collection('proyecto').doc(data.id).update({
+        id: data.id,
+        name: pokemon.name
+      })
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
   return (
     <div className='container'>
@@ -74,12 +88,26 @@ const App = () => {
       <hr />
       {
         listaPokemon.map((item) => (
-          <div key={item.id}>
-            <label htmlFor={item.id}>{item.name}</label>
-            <img src={item.img} alt={item.name} id={item.id} />
-            <button 
-            className='btn btn-warning btn-block mx-2' 
-            onClick={erase}>Eliminar</button>
+          <div key={item.id} className='d-flex flex-row bd-highlight mb-3 card '>
+            <div className='col-1 align-self-center'>
+              <label htmlFor={item.id}>{item.name}</label>
+            </div>
+
+            <div className='col-1 align-self-center'>
+              <img src={item.img} alt={item.name} id={item.id} />
+            </div>
+            <div className='col-1 align-self-center'>
+              <div className='row'>
+                <button
+                  className='btn btn-danger btn-block my-1'
+                  onClick={erase}>Eliminar</button>
+              </div>
+              <div className='row'>
+                <button
+                  className='btn btn-warning btn-block my-1'
+                  onClick={edit}>Editar</button>
+              </div>
+            </div>
           </div>
         ))
       }
