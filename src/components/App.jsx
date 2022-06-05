@@ -29,13 +29,15 @@ const App = () => {
         const nuevoReg =
         {
           name: pokemon.name,
-          img: pokemon.img
+          img: pokemon.img,
+          descripcion: pokemon.descripcion
         }
         const data = await db.collection('proyecto').add(nuevoReg)
         const newPokemon = {
           id: data.id,
           name: pokemon.name,
-          img: pokemon.img
+          img: pokemon.img,
+          descripcion: pokemon.descripcion
         }
         setListaPokemon([...listaPokemon, newPokemon])
         setPokemon({})
@@ -52,18 +54,18 @@ const App = () => {
     consulta()
   }, [])
 
-  
-    const erase = id => {
-      try {
-        const db = firebase.firestore()
-        db.collection('proyecto').doc(id).delete()
-        const aux = listaPokemon.filter(item => item.id !== id)
-        setListaPokemon(aux)
-      } catch (err) {
-        console.log(err)
-      }
+
+  const erase = id => {
+    try {
+      const db = firebase.firestore()
+      db.collection('proyecto').doc(id).delete()
+      const aux = listaPokemon.filter(item => item.id !== id)
+      setListaPokemon(aux)
+    } catch (err) {
+      console.log(err)
     }
-  
+  }
+
 
   const edit = async (e) => {
     e.preventDefault()
@@ -81,30 +83,32 @@ const App = () => {
 
   return (
     <div className='container'>
-      <h1 className='text-center'>Aplicación</h1>
+      <h1 className='text-center animate__heartBeat'>Aplicación</h1>
       <Form
         setPokemon={setPokemon}
       />
       <hr />
       {
         listaPokemon.map((item) => (
-          <div key={item.id} className='d-flex flex-row bd-highlight mb-3 card '>
+          <div key={item.id} className='d-flex flex-row bd-highlight mb-3 card animate__headShake'>
             <div className='col-1 align-self-center'>
-              <label htmlFor={item.id}>{item.name}</label>
+              <label htmlFor="Name">{item.name}</label>
             </div>
-
             <div className='col-1 align-self-center'>
-              <img src={item.img} alt={item.name} id={item.id} />
+              <label htmlFor="Descripcion">{item.descripcion}</label>
+            </div>
+            <div className='col-1 align-self-center animate__headShake'>
+              <img src={item.img} alt={item.id}/>
             </div>
             <div className='col-1 align-self-center'>
               <div className='row'>
                 <button
-                  className='btn btn-danger btn-block my-1'
+                  className='btn btn-danger btn-block my-1 animate__backInDown'
                   onClick={erase}>Eliminar</button>
               </div>
               <div className='row'>
                 <button
-                  className='btn btn-warning btn-block my-1'
+                  className='btn btn-warning btn-block my-1 animate__backInDown'
                   onClick={edit}>Editar</button>
               </div>
             </div>
